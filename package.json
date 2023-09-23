@@ -1,0 +1,19 @@
+{
+  "name": "mycotek",
+  "version": "1.0.0",
+  "description": "mycoTek is a comprehensive platform designed to assist mycologists in managing their cultures and techniques. Built on the MERN stack with TypeScript, the application offers a range of features including a live culture library, technique (tek) management, and a social media aspect for community engagement.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "3.0.1"
+  }
+}
