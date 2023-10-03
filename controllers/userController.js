@@ -21,21 +21,27 @@ const getUsers = asyncHandler(async (req, res) => {
 
 const createUser = asyncHandler(async (req, res) => {
     const { username, password, email } = req.body;
-
     // confirm data
     if (!username || !password || !email) {
         return res.status(400).json({ message: 'Please provide all required fields' });
     }
     // check if user already exists
     const duplicate = await User.findOne({ username }).lean().exec();
-
     if (duplicate) {
         return res.status(409).json({ message: 'User already exists' });
     }
     // hash password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt); //salt the hash 10 times
-    const newUser = await user.create({ username, password: hashedPassword, email });
+    const hashedPw = await bcrypt.hash(password, 10);
+    // create user object with the hashed password and save to db
+    const userObject = { username, "password": hashedPw, email };
+    const newUser = await User.create(userObject);
+    // confirm new user exists
+    if (newUser) {
+        res.status(201).json({ message: 'User created successfully' });
+    } else {
+        res.status(400).json({ message: 'Invalid user data' });
+    }
+    // return new user
     res.json(newUser);
 });
 
@@ -44,10 +50,27 @@ const createUser = asyncHandler(async (req, res) => {
 // @access private
 
 const updateUser = asyncHandler(async (req, res) => {    
-    const { username, password } = req.body;
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-    const updatedUser = await user.findByIdAndUpdate(req.params.id, { username, password: hashedPassword }, { new: true });
+    // confirms username is the thing being updated
+    if (username) {
+        updateFields.username = username;
+    }
+    // confirms password is the thing being updated
+    if (password) {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPw = await bcrypt.hash(password, salt);
+        updateFields.password = hashedPw;
+    }
+
+    if (!username && !password) {
+        return res.status(400).json({ message: 'Please provide a valid field to update' });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, updateFields, { new: true });
+
+    if (!updatedUser) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+
     res.json(updatedUser);
 });
 
@@ -56,8 +79,21 @@ const updateUser = asyncHandler(async (req, res) => {
 // @access private
 
 const removeUser = asyncHandler(async (req, res) => {
-    const deletedUser = await user.findByIdAndDelete(req.params.id);
-    res.json(deletedUser);
+    // Finde the user first and check if they exist
+    const userToDelete = await User.findByIdAndDelete(req.params.id);
+    // if the user doesn't exist return a 404
+    if (!userToDelete) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+    // delete the user and return the deleted user data as a response
+   const deletedUser = await User.findByIdAndDelete(req.params.id);
+
+   // Optionally perform ant cleanup tasks, like deleting associated data
+
+    return res.status(200).json({
+        message: 'User deleted successfully',
+        deletedUser
+    });
 });
 
 module.exports = { getUsers, createUser, updateUser, removeUser };
