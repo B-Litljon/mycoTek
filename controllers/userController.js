@@ -1,4 +1,4 @@
-const user = require('../models/userModel');
+const User = require('../models/User');
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcrypt');
 
@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 // @route   GET /users
 // @access  private
 
-const getUsers = asyncHandler(async (req, res) => {
+const getUsers = asyncHandler(async (req, res) => { // functional :)
     const users = await User.find().select('-password').lean();
     if (!users) {
         return res.status(404).json({ message: 'No users found' });
@@ -19,7 +19,7 @@ const getUsers = asyncHandler(async (req, res) => {
 // @route POST /users
 // @access private
 
-const createUser = asyncHandler(async (req, res) => {
+const createUser = asyncHandler(async (req, res) => { // duplicate user check is functional :)
     const { username, password, email } = req.body;
     // confirm data
     if (!username || !password || !email) {
@@ -49,7 +49,7 @@ const createUser = asyncHandler(async (req, res) => {
 // @route PATCH /users/:id
 // @access private
 
-const updateUser = asyncHandler(async (req, res) => {    
+const updateUser = asyncHandler(async (req, res) => {    // doesn't work yet - need to fix
     // confirms username is the thing being updated
     if (username) {
         updateFields.username = username;
@@ -85,14 +85,10 @@ const removeUser = asyncHandler(async (req, res) => {
     if (!userToDelete) {
         return res.status(404).json({ message: 'User not found' });
     }
-    // delete the user and return the deleted user data as a response
-   const deletedUser = await User.findByIdAndDelete(req.params.id);
-
-   // Optionally perform ant cleanup tasks, like deleting associated data
-
+    // if the user does exist return a 200 with the deleted user
     return res.status(200).json({
         message: 'User deleted successfully',
-        deletedUser
+        deletedUser: userToDelete
     });
 });
 
