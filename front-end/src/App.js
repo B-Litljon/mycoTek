@@ -1,5 +1,6 @@
 import React from 'react';
-import Navbar from 'navbar';
+import Navbar from './components/navbar';
+import 'bulma/css/bulma.css';
 
 function App() {
   return (
@@ -9,5 +10,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
