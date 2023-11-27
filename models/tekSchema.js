@@ -21,4 +21,6 @@ const tekSchema = new mongoose.Schema({
       }
     ],
   });
+
+  module.exports = mongoose.model("Tek", tekSchema);
   
