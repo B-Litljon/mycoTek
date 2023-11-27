@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const myceliumCultureSchema = new mongoose.Schema({
-    species: String,
     strain: String,
     stage: String, // e.g., "Inoculation", "Colonization", "Fruiting"
     substrate: String,
