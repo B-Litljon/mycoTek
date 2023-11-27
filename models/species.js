@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
-const SporeSchema = require("./SporeSchema");
-const MyceliumSchema = require("./MyceliumSchema"); 
-const FruitbodySchema = require("./FruitbodySchema");
+const SporeSchema = require("./sporeSchema");
+const MyceliumSchema = require("./myceliumSchema"); 
+const FruitbodySchema = require("./fruitbodySchema");
 
-const SpeciesSchema = new Schema({
+const speciesSchema = new Schema({
     name: {
         type: String,
         required: [true, "Species name is required"],
@@ -21,6 +21,6 @@ const SpeciesSchema = new Schema({
     fruitbody: [FruitbodySchema] // Array of FruitbodySchema
 });
 
-const Species = mongoose.model('Species', SpeciesSchema);
 
-module.exports = Species;
+
+module.exports = mongoose.model('Species', speciesSchema);

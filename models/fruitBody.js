@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const fruitbodySchema = new Schema({
+const fruitbodySchema = new mongoose.Schema({
     description: {
         type: String,
         required: [true, "Description is required"]
@@ -31,4 +31,4 @@ const fruitbodySchema = new Schema({
     // You can add more fields specific to your application's requirements
 });
 
-module.exports = fruitbodySchema;
+module.exports = mongoose.model('Fruitbody', fruitbodySchema);

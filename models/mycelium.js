@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const myceliumCultureSchema = new mongoose.Schema({
+const myceliumSchema = new mongoose.Schema({
     strain: String,
     stage: String, // e.g., "Inoculation", "Colonization", "Fruiting"
     substrate: String,
@@ -11,4 +11,4 @@ const myceliumCultureSchema = new mongoose.Schema({
     images: [String], // URLs or file paths to images
   });
 
-module.exports = mongoose.model("MyceliumLibrary", myceliumCultureSchema);
+module.exports = mongoose.model("Mycelium", myceliumSchema);

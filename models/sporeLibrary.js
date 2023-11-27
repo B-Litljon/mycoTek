@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 // Your existing Spore Schema
-const SporeSchema = new Schema({
+const sporeSchema = new Schema({
     // species field might be removed or kept based on your requirement
     strain: String,
     source: String,
@@ -17,4 +17,4 @@ const SporeSchema = new Schema({
     // Additional fields as needed
 });
 
-module.exports = mongoose.model("SporeLibrary", sporeSchema);
+module.exports = mongoose.model("Spore", sporeSchema);
