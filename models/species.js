@@ -1,26 +1,22 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 const SporeSchema = require("./sporeSchema");
-const MyceliumSchema = require("./myceliumSchema"); 
+const MyceliumSchema = require("./myceliumSchema");
 const FruitbodySchema = require("./fruitbodySchema");
 
 const speciesSchema = new Schema({
     name: {
         type: String,
-        required: [true, "Species name is required"],
+        required: true,
         unique: true,
-        minlength: [3, "Species name must be at least 3 characters long"],
-        maxlength: [20, "Species name must be less than 20 characters long"]
+        minlength: 3,
+        maxlength: 20
     },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
-    spores: [SporeSchema],     // Array of SporeSchema
-    mycelium: [MyceliumSchema], // Array of MyceliumSchema
-    fruitbody: [FruitbodySchema] // Array of FruitbodySchema
+    createdAt: { type: Date, default: Date.now },
+    spores: [SporeSchema],
+    mycelium: [MyceliumSchema],
+    fruitbody: [FruitbodySchema]
 });
-
-
 
 module.exports = mongoose.model('Species', speciesSchema);

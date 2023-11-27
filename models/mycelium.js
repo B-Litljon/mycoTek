@@ -1,14 +1,15 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const myceliumSchema = new mongoose.Schema({
+const myceliumSchema = new Schema({
     strain: String,
-    stage: String, // e.g., "Inoculation", "Colonization", "Fruiting"
+    stage: String,
     substrate: String,
-    growthRate: Number, // e.g., in mm/day
-    contaminationRisk: String, // e.g., "High", "Medium", "Low"
+    growthRate: Number,
+    contaminationRisk: String,
     harvestDate: Date,
     notes: [String],
-    images: [String], // URLs or file paths to images
-  });
+    images: [String]
+});
 
-module.exports = mongoose.model("Mycelium", myceliumSchema);
+module.exports = myceliumSchema;
