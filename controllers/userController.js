@@ -30,7 +30,7 @@ const createUser = asyncHandler(async (req, res) => { // duplicate user check is
     if (duplicate) {
         return res.status(409).json({ message: 'User already exists' });
     }
-    // hash password
+    // hash the pass YO
     const hashedPw = await bcrypt.hash(password, 10);
     // create user object with the hashed password and save to db
     const userObject = { username, "password": hashedPw, email };
