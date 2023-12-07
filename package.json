@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server",
-    "dev": "nodemon server"
+    "dev": "nodemon server",
+    "client": "cd front-end && npm start",
+    "dev:both": "concurrently \"npm run dev\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
