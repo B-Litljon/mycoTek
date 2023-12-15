@@ -1,4 +1,4 @@
-const Species = require('../models/speciesSchema');
+const Species = require('../models/species');
 const asyncHandler = require('express-async-handler');
 
 // @desc    Get all species

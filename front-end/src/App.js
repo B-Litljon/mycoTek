@@ -1,15 +1,17 @@
 import React from 'react';
-import Navbar from './components/navbar';
-import 'bulma/css/bulma.css';
+import 'bulma/css/bulma.min.css';
+import SignUpPage from './components/signUp';
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
-      {/* Other components or content here */}
+      <section className="section">
+        <div className="container">
+          <SignUpPage />
+        </div>
+      </section>
     </div>
   );
 }
-
 
 export default App;
