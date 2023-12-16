@@ -45,11 +45,29 @@ const createUser = asyncHandler(async (req, res) => { // duplicate user check is
     res.json(newUser);
 });
 
+const loginUser = asyncHandler(async (req, res) => {
+    const { username, password } = req.body;
+    if (!username || !password) {
+        return res.status(400).json({ message: 'Please provide all required fields' });
+    }
+
+    const user = await User.findOne({ username }).lean().exec();
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+        return res.status(401).json({ message: 'Invalid username or password' });
+    }
+
+    // Generate a token or start a session here (optional)
+
+    // Return necessary user info (exclude password and other sensitive data)
+    const userInfo = { ...user, password: undefined };
+    res.json(userInfo);
+});
+
 // @desc Patch a user   
 // @route PATCH /users/:id
 // @access private
 
-const updateUser = asyncHandler(async (req, res) => {    // doesn't work yet - need to fix
+const updateUser = asyncHandler(async (req, res) => {    // doesn't work yet - need to fix from what I remember, but I'm not sure what's wrong
     // confirms username is the thing being updated
     if (username) {
         updateFields.username = username;
@@ -92,4 +110,4 @@ const removeUser = asyncHandler(async (req, res) => {
     });
 });
 
-module.exports = { getUsers, createUser, updateUser, removeUser };
+module.exports = { getUsers, createUser, updateUser, removeUser, loginUser };
