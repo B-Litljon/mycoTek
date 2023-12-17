@@ -41,8 +41,6 @@ const createUser = asyncHandler(async (req, res) => { // duplicate user check is
     } else {
         res.status(400).json({ message: 'Invalid user data' });
     }
-    // return new user
-    res.json(newUser);
 });
 
 const loginUser = asyncHandler(async (req, res) => {

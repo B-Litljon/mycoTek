@@ -17,7 +17,7 @@ function SignUpPage() {
     e.preventDefault();
     
     try {
-      const response = await fetch('https://placeholderAPI.com/signup', {
+      const response = await fetch('http://localhost:3500/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
