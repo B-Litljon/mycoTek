@@ -9,4 +9,6 @@ router.route('/')
     .patch(userController.updateUser)
     .delete(userController.removeUser)
 
+router.post('/login', userController.loginUser);
+
 module.exports = router;
