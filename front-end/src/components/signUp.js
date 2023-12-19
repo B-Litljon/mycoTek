@@ -8,6 +8,8 @@ function SignUpPage() {
     confirmPassword: '',
     email: ''
   });
+
+  const [error, setError] = useState(''); // sends error message to user when duplicate username is entered
   
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -28,8 +30,15 @@ function SignUpPage() {
       });
 
       const data = await response.json();
-      console.log(data);
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Error creating user');
+      }
+
+      // Handle successful user creation here (e.g., redirecting to login page)
+      console.log('User created:', data);
     } catch (err) {
+      setError(err.message); // Set error message from catch block
       console.error(err);
     }
   };
@@ -39,6 +48,14 @@ function SignUpPage() {
     <div className="container">
       <div className="columns is-centered">
         <div className="column is-half">
+
+          {/* Display error message if error exists */}
+          {error && (
+              <div className="notification is-danger">
+                {error}
+              </div>
+              )}
+
           <form onSubmit={handleSubmit} className="box">
             <h1 className="title has-text-centered">Signup</h1>
 

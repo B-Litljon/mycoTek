@@ -20,7 +20,8 @@ const getUsers = asyncHandler(async (req, res) => { // functional :)
 // @access private
 
 const createUser = asyncHandler(async (req, res) => { // duplicate user check is functional :)
-    const { username, password, email } = req.body;
+    let { username, password, email } = req.body;
+    username = username.trim().toLowerCase();
     // confirm data
     if (!username || !password || !email) {
         return res.status(400).json({ message: 'Please provide all required fields' });
