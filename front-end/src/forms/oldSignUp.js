@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import InputField from '../components/inputField';
+
 function SignUpPage() {
   const [formData, setFormData] = useState({
     username: '',
@@ -7,7 +7,6 @@ function SignUpPage() {
     confirmPassword: '',
     email: ''
   });
-// some logic here needs to be rewritten more concisely, here as in this whole component
 
   const [error, setError] = useState(''); // sends error message to user when duplicate username is entered
   const [isSignup, setIsSignup] = useState(true); 
@@ -64,49 +63,74 @@ function SignUpPage() {
             <h1 className="title has-text-centered">{isSignup ? 'Signup' : 'Signin'}</h1>
   
             {/* Username Field */}
-            <InputField
-                type="text"
-                name="username"
-                label="Username"
-                placeholder="Username"
-                value={formData.username}
-                onChange={handleChange}
-            />
+            <div className="field">
+              <label className="label">Username</label>
+              <div className="control">
+                <input 
+                  className="input" 
+                  type="text" 
+                  name="username" 
+                  placeholder="Username" 
+                  value={formData.username} 
+                  onChange={handleChange} 
+                />
+              </div>
+            </div>
   
-            {/* Email Field */}
-            <InputField
-                type="email"
-                name="email"
-                label="Email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
-            />
+            {/* Email Field - Only for Signup */}
+            {isSignup && (
+              <div className="field">
+                <label className="label">Email</label>
+                <div className="control">
+                  <input 
+                    className="input" 
+                    type="email" 
+                    name="email" 
+                    placeholder="Email" 
+                    value={formData.email} 
+                    onChange={handleChange} 
+                  />
+                </div>
+              </div>
+            )}
   
             {/* Password Field */}
-            <InputField
-                type="password"
-                name="password"
-                label="Password"
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleChange}
-            />
+            <div className="field">
+              <label className="label">Password</label>
+              <div className="control">
+                <input 
+                  className="input" 
+                  type="password" 
+                  name="password" 
+                  placeholder="Password" 
+                  value={formData.password} 
+                  onChange={handleChange} 
+                />
+              </div>
+            </div>
   
-            {/* Confirm Password Field */}
-            <InputField
-                type="password"
-                name="confirmPassword"
-                label="Confirm Password"
-                placeholder="Confirm Password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-            />
+            {/* Confirm Password Field - Only for Signup */}
+            {isSignup && (
+              <div className="field">
+                <label className="label">Confirm Password</label>
+                <div className="control">
+                  <input 
+                    className="input" 
+                    type="password" 
+                    name="confirmPassword" 
+                    placeholder="Confirm Password" 
+                    value={formData.confirmPassword} 
+                    onChange={handleChange} 
+                  />
+                </div>
+              </div>
+            )}
   
             {/* Submit Button */}
             <div className="field">
               <div className="control">
                 <button type="submit" className="button is-primary is-fullwidth">
+                  {isSignup ? 'Sign Up' : 'Sign In'}
                 </button>
               </div>
             </div>

@@ -1,17 +1,22 @@
-function InputField(type, name, value, onChange, placeholder, label) {
+function InputField({ type, name, label, value, onChange, placeholder }) {
     return (
-        <div className="form-group">
-            <label htmlFor={name}>{label}</label>
-            <input
-                type={type}
-                className="form-control"
-                name={name}
-                value={value}
-                onChange={onChange}
-                placeHolder={placeholder}
-            />
+      <div className="field">
+        <label className="label" htmlFor={name}>{label}</label>
+        <div className="control">
+          <input
+            className="input"
+            type={type}
+            name={name}
+            id={name}
+            placeholder={placeholder}
+            value={value}
+            onChange={onChange}
+          />
         </div>
+      </div>
     );
-}
+  }
+  
 
 export default InputField;
+
