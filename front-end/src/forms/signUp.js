@@ -8,31 +8,36 @@ function SignUpPage() {
     email: ''
   });
   const [error, setError] = useState(''); // sends error message to user when duplicate username is entered 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
   };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(''); // Reset error on new submission
-    const url = 'http://localhost:3500/users' // Adjust endpoint based on mode
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError(''); 
+
+    const url = 'http://localhost:3500/users' 
     const body =  formData ;
+
     try {
       const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
       });
+
       const data = await response.json();
+
       if (!response.ok) {
         throw new Error(data.message || 'Error creating user ');
-      }
-      
-      // Further actions upon successful signup/login (like redirect or state update)
+      }     
+
     } catch (err) {
       setError(err.message);
       console.error(err);
     }
   };
+  
   return (
     <div className="container">
       <div className="columns is-centered">
@@ -95,5 +100,4 @@ function SignUpPage() {
     </div>
  )};
   
-
 export default SignUpPage;
