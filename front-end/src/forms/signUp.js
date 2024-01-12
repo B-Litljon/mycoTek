@@ -7,19 +7,15 @@ function SignUpPage() {
     confirmPassword: '',
     email: ''
   });
-  const [error, setError] = useState(''); // sends error message to user when duplicate username is entered
-  const [isSignup, setIsSignup] = useState(true); 
+  const [error, setError] = useState(''); // sends error message to user when duplicate username is entered 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(''); // Reset error on new submission
-    const url = `http://localhost:3500/users/${isSignup ? 'users' : 'login'}`; // Adjust endpoint based on mode
-    const body = isSignup ? formData : {
-      username: formData.username,
-      password: formData.password
-    };
+    const url = 'http://localhost:3500/users' // Adjust endpoint based on mode
+    const body =  formData ;
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -28,7 +24,7 @@ function SignUpPage() {
       });
       const data = await response.json();
       if (!response.ok) {
-        throw new Error(data.message || (isSignup ? 'Error creating user' : 'Error logging in'));
+        throw new Error(data.message || 'Error creating user ');
       }
       
       // Further actions upon successful signup/login (like redirect or state update)
@@ -48,7 +44,7 @@ function SignUpPage() {
             </div>
           )}
           <form onSubmit={handleSubmit} className="box">
-            <h1 className="title has-text-centered">{isSignup ? 'Signup' : 'Signin'}</h1>
+            <h1 className="title is-4">Sign Up</h1>
             {/* Username Field */}
             <InputField
                 type="text"
