@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import InputField from '../components/inputField';
+
 function SignUpPage() {
   const [formData, setFormData] = useState({
     username: '',
