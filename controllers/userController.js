@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcrypt');
-
+const jwt = require('jsonwebtoken');
 
 // @desc    Get all users
 // @route   GET /users
@@ -56,10 +56,10 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 
     // Generate a token or start a session here (optional)
-
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
     // Return necessary user info (exclude password and other sensitive data)
     const userInfo = { ...user, password: undefined };
-    res.json(userInfo);
+    res.json({userInfo, token});
 });
 
 // @desc Patch a user   
