@@ -57,9 +57,16 @@ const loginUser = asyncHandler(async (req, res) => {
 
     // Generate a token or start a session here (optional)
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+
+    res.cookie('token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        maxAge: 1000 * 60 * 60 * 24 // 1 day
+    })
     // Return necessary user info (exclude password and other sensitive data)
     const userInfo = { ...user, password: undefined };
-    res.json({userInfo, token});
+    res.json(userInfo);
 });
 
 // @desc Patch a user   
