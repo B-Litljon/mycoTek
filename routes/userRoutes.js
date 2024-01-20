@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
+const auth = require('../middleware/tokenAuth');
 
 
 router.route('/')
-    .get(userController.getUsers)
-    .post(userController.createUser)
-    .patch(userController.updateUser)
-    .delete(userController.removeUser)
+    .get(auth, userController.getUsers)
+    .post(auth, userController.createUser)
+    .patch(auth, userController.updateUser)
+    .delete(auth, userController.removeUser)
 
 router.post('/login', userController.loginUser);
 

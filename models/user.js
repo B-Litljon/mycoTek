@@ -19,7 +19,11 @@ const userSchema = new mongoose.Schema({
         unique: true,
         minlength: [5, "Email must be at least 5 characters long"],
         maxlength: [50, "Email must be less than 50 characters long"]
-    },
+    }, 
+    species: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Species'
+    }],
     createdAt: {
         type: Date,
         default: Date.now
