@@ -7,6 +7,8 @@ router.route('/')
     .get(speciesController.getAllSpecies)
     .post(speciesController.createSpecies);
 
+
+// will need to update the routes to handle updating the subdocuments like the following: spores, fruiting bodies, etc.
 router.route('/:id')
     .get(speciesController.getSpeciesById)
     .patch(speciesController.updateSpecies)
