@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.min.css';
-import SignUpPage from './forms/signUp';
+import SignUpPage from './components/pages/Signup';
+import LoginPage from './components/pages/Login';
 
 function App() {
   return (
