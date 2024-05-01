@@ -1,7 +1,18 @@
-
 import React, { useState } from "react";
 import TreeNode from "./TreeNode";
 
+/**
+ * TreeList component
+ * 
+ * This component represents a collapsible tree structure. It manages the expanded state of its nodes 
+ * and renders child nodes recursively.
+ *
+ * @props {array} nodes - An array of objects representing the nodes in the tree structure. 
+ *                         Each object should have properties like 'label' (text displayed for the node) 
+ *                         and optionally 'children' (another array of nodes for nested structures).
+ * 
+ * @returns {jsx} A JSX element representing the collapsible tree structure.
+ */
 const TreeList = ({ nodes }) => {
     const [expandedNodes, setExpandedNodes] = useState({});
 
