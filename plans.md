@@ -1,3 +1,36 @@
+
+# MERN Stack Application Frontend Todo List
+
+## Frontend Tasks
+1. **JWT Authentication Integration:**
+   - Implement JWT authentication in your React frontend.
+   - Set up API calls to authenticate users during login and signup.
+   - Store the JWT token securely (e.g., in local storage or a cookie). [ ]
+
+2. **React Router Setup:**
+   - Install `react-router-dom` if you haven't already.
+   - Define routes for different parts of your application (e.g., login, signup, main content).
+   - Use `Route` components to render the appropriate components based on the URL path. [ ]
+
+3. **Main Content Rendering:**
+   - Create the main content components (e.g., dashboard, user profile, etc.).
+   - Set up protected routes that require authentication.
+   - Redirect users to the login page if they're not authenticated. [ ]
+
+## General Tasks
+1. **Testing:**
+   - Write unit tests for your frontend components.
+   - Ensure that authentication and routing work as expected. [ ]
+
+2. **Styling and UI:**
+   - Style your components using CSS or a UI library (e.g., Material-UI).
+   - Make sure your app looks visually appealing. [ ]
+
+3. **Deployment:**
+   - Deploy your application to a hosting service (e.g., Heroku, Netlify, or Vercel). [ ]
+
+
+
 # Mycotek UI/UX Concept Summary
 
 ## Core Concept
